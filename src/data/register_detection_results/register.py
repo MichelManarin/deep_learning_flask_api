@@ -35,8 +35,8 @@ class RegisterDetectionResults(RegisterDetectionResultsInterface):
         if validate_entry:
             user_input = self.user_input_repository.select(user_input_id)
 
-            iou = user_input.iou
-            confidence = user_input.confidence
+            iou = user_input[0].iou
+            confidence = user_input[0].confidence
             
             image_bytes = base64.b64decode(image_base64)
             image_buffer = BytesIO(image_bytes)

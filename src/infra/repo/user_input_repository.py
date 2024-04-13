@@ -46,8 +46,7 @@ class UserInputRepository(UserInputRepositoryInterface):
     try: 
       with DBConnectionHandler() as db_connection:
         data = db_connection.session.query(UserInputModel).filter_by(id=user_input_id).one()
-        print(data)
-        return data
+        return [data]
     except:
       db_connection.session.rollback()
       raise

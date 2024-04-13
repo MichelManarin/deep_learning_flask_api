@@ -21,8 +21,6 @@ class RegisterDetectionResultsController(RouteInterface):
 
             body_params = http_request.body.keys()
 
-            print(body_params)
-
             if "user_input_id" in body_params and "number_fps" in body_params and "image_base64" in body_params:
                 user_input_id = http_request.body["user_input_id"]
                 number_fps = http_request.body["number_fps"]
