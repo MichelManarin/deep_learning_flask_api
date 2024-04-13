@@ -54,6 +54,7 @@ def detect():
     
     return jsonify(detections)
 
+# TODO: refactor endpoints below in future
 @api_routes_bp.route('/health_check', methods=['GET'])
 def health_check():
     if model is None:

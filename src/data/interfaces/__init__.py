@@ -1,1 +1,2 @@
 from .user_input_repository_interface import UserInputRepositoryInterface
+from .detection_results_repository_interface import DetectionResultsRepositoryInterface

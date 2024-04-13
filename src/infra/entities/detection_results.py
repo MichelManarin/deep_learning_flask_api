@@ -12,6 +12,7 @@ class DetectionResult(Base):
     id = Column(Integer, primary_key=True)
     user_input_id = Column(Integer, ForeignKey("user_inputs.id"))
     box = Column(JSONB, nullable=False)
+    number_fps = Column(Integer, nullable=False)
     class_name = Column(String, nullable=False)
     confidence = Column(Float, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -25,6 +26,7 @@ class DetectionResult(Base):
         if (self.id == other.id 
             and self.box == other.box 
             and self.class_name == other.class_name 
+            and self.number_fps == other.number_fps 
             and self.confidence == other.confidence 
             and self.user_input_id == other.user_input_id):
             return True
