@@ -1,1 +1,1 @@
-from .fake import FakerRepo
+from src.infra.repo.user_input_repository import UserInputRepository
