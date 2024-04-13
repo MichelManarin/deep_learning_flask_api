@@ -4,10 +4,9 @@ FROM python:3.9-slim
 # Install ffmpeg and other dependencies
 RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
 
-RUN apt-get update && \
-    apt-get install -y postgresql postgresql-contrib postgresql-devel python3 python3-pip && \
-    apt-get install -y build-essential && \
-    apt-get clean
+RUN apt-get update \
+    && apt-get -y install libpq-dev gcc \
+    && pip install psycopg2
 
     # Set the working directory inside the container
 WORKDIR /app
