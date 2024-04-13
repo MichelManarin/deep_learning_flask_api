@@ -1,10 +1,11 @@
 
 from typing import List
+from src.data.interfaces import UserInputRepositoryInterface
 from src.domain.models import UserInput
 from src.infra.config import DBConnectionHandler
 from src.infra.entities import UserInput as UserInputModel
 
-class UserInputRepository:
+class UserInputRepository(UserInputRepositoryInterface):
   """
     Class to manage User Input Repository
   """
