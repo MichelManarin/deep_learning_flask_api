@@ -1,43 +1,4 @@
-
-from PIL import Image
-from flask import Flask, request, jsonify
-from io import BytesIO
-from src.infra.neural_network import Model
-import base64
-import json
-from codecs import encode
-
-app = Flask(__name__)
-
-model = Model("yolov8s")
-
-@app.route('/detect', methods=['POST'])
-def detect():
-    image_base64  = request.json['image_base64']
-    confidence = request.json['confidence']
-    iou = request.json['iou']
-    
-    image_bytes = base64.b64decode(image_base64)
-    image_buffer = BytesIO(image_bytes)
-    image = Image.open(image_buffer)
-    image_rgb = image.convert('RGB')
-    predictions = model(image_rgb, confidence, iou)
-    detections = [p.to_dict() for p in predictions]
-    
-    return jsonify(detections)
-
-@app.route('/health_check', methods=['GET'])
-def health_check():
-    if model is None:
-        return "Model is not loaded"
-    return f"Model {model.model_name} is loaded"
-
-@app.route('/load_model', methods=['POST'])
-def load_model():
-    model_name = request.json['model_name']
-    global model
-    model = Model(model_name)
-    return f"Model {model_name} is loaded"
+from src.main.configs import app
 
 if __name__ == "__main__":
-        app.run(host='0.0.0.0')
+    app.run(host="0.0.0.0", port=5000)
