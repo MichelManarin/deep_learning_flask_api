@@ -21,11 +21,11 @@ def register_user():
     if response.status_code < 300:
         message = {
             "type": "user-input",
-            "id": response.body.id,
+            "data": response.body.id,
             "attributest": {"path": response.body.path, "iou": response.body.iou," confidence": response.body.confidence },
         }
 
-        return jsonify({"data": message}), response.status_code
+        return jsonify(message), response.status_code
 
     # Handling Errors
     return (
@@ -45,11 +45,10 @@ def register_detection_result():
     if response.status_code < 300:
         message = {
             "type": "detection-result",
-            "data": response.body,
-            "attributest": {},
+            "data": response.body[0],
         }
 
-        return jsonify({"data": message}), response.status_code
+        return jsonify(message), response.status_code
 
     # Handling Errors
     return (

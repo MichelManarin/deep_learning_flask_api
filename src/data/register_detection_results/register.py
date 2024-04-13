@@ -46,11 +46,9 @@ class RegisterDetectionResults(RegisterDetectionResultsInterface):
             predictions = model(image_rgb, confidence, iou)
             detections = [p.to_dict() for p in predictions]
 
-            insert_results = []
+            predictions_list = []
             for detection in detections:
-                insert_result = self.detection_results_repository.insert(user_input_id=user_input_id, box=detection['box'], number_fps=number_fps, class_name= detection['class_name'], confidence=detection['confidence'])
-                insert_results.append(insert_result)
-
-            response = { "detections": insert_results }
-
+                self.detection_results_repository.insert(user_input_id=user_input_id, box=detection['box'], number_fps=number_fps, class_name= detection['class_name'], confidence=detection['confidence'])
+                predictions_list.append(detections)
+            response = predictions_list
         return {"Success": validate_entry, "Data": response}
