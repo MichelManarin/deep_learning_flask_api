@@ -4,7 +4,6 @@ from sqlalchemy.orm import relationship
 from src.infra.config import Base
 from datetime import datetime
 
-
 class DetectionResult(Base):
     """ DetectionResult Entity """
 
@@ -21,3 +20,12 @@ class DetectionResult(Base):
 
     def __repr__(self):
         return f"DetectionResult [id={self.id}, class_name={self.class_name}]"
+    
+    def __eq__(self, other):
+        if (self.id == other.id 
+            and self.box == other.box 
+            and self.class_name == other.class_name 
+            and self.confidence == other.confidence 
+            and self.user_input_id == other.user_input_id):
+            return True
+        return False

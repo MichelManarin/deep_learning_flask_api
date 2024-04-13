@@ -1,4 +1,5 @@
 
+from typing import List
 from src.domain.models import UserInput
 from src.infra.config import DBConnectionHandler
 from src.infra.entities import UserInput as UserInputModel
@@ -32,4 +33,24 @@ class UserInputRepository:
         db_connection.session.close()
 
     return None
+  
+  @classmethod
+  def select(cls, user_input_id: int = None) -> List[UserInput]:
+    """
+    Select data in user input entity by id
+    :param - user_input_id: Id of the registry
+    :return - List with Users selected
+    """
 
+    try: 
+      with DBConnectionHandler() as db_connection:
+        data = db_connection.session.query(UserInputModel).filter_by(id=user_input_id).one()
+        return [data]
+    except:
+      db_connection.session.rollback()
+      raise
+    finally:
+      db_connection.session.close()
+
+    return None
+      

@@ -18,3 +18,10 @@ class UserInput(Base):
 
     def __repr__(self):
         return f"UserInput [id={self.id}, video_path={self.video_path}]"
+    
+    def __eq__(self, other):
+        if (self.id == other.id 
+            and self.iou == other.iou 
+            and self.confidence == other.confidence):
+            return True
+        return False
