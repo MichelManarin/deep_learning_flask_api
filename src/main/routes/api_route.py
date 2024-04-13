@@ -5,7 +5,8 @@ from flask import Blueprint, jsonify, request
 from src.infra.neural_network import Model
 
 from src.main.composer import (
-    register_user_input_composer
+    register_user_input_composer,
+    register_detection_results_composer
 )
 from src.main.adapter import flask_adapter
 
@@ -22,9 +23,33 @@ def register_user():
 
     if response.status_code < 300:
         message = {
-            "type": "user_input",
+            "type": "user-input",
             "id": response.body.id,
             "attributest": {"path": response.body.path, "iou": response.body.iou," confidence": response.body.confidence },
+        }
+
+        return jsonify({"data": message}), response.status_code
+
+    # Handling Errors
+    return (
+        jsonify(
+            {"error": {"status": response.status_code, "title": response.body["error"]}}
+        ),
+        response.status_code,
+    )
+
+@api_routes_bp.route("/api/detection-result", methods=["POST"])
+def register_detection_result():
+    """ register detection result """
+
+    message = {}
+    response = flask_adapter(request=request, api_route=register_detection_results_composer())
+
+    if response.status_code < 300:
+        message = {
+            "type": "detection-result",
+            "id": response.body.id,
+            "attributest": {},
         }
 
         return jsonify({"data": message}), response.status_code

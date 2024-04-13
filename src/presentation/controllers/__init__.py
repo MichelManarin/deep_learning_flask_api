@@ -1,1 +1,2 @@
 from .register_user_input_controller import RegisterUserInputController
+from .register_detection_results_controller import RegisterDetectionResultsController
