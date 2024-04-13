@@ -4,7 +4,12 @@ FROM python:3.9-slim
 # Install ffmpeg and other dependencies
 RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
 
-# Set the working directory inside the container
+RUN apt-get update && \
+    apt-get install -y postgresql postgresql-contrib postgresql-devel python3 python3-pip && \
+    apt-get install -y build-essential && \
+    apt-get clean
+
+    # Set the working directory inside the container
 WORKDIR /app
 
 # Copy the requirements file to the working directory
