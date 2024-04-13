@@ -1,6 +1,7 @@
-from collections import namedtuple
+
+from src.domain.models import UserInput
 from src.infra.config import DBConnectionHandler
-from src.infra.entities import UserInput
+from src.infra.entities import UserInput as UserInputModel
 
 class UserInputRepository:
   """
@@ -15,15 +16,15 @@ class UserInputRepository:
     :return - tuplle with new user input
     """
 
-    InsertData = namedtuple("UserInput", "id, path, confidence, iou")
-
     with DBConnectionHandler() as db_connection:
       try:
-        new_input = UserInput(video_path=path, confidence=confidence, iou=iou)
+        new_input = UserInputModel(video_path=path, confidence=confidence, iou=iou)
         db_connection.session.add(new_input)
         db_connection.session.commit()
 
-        return InsertData(id=new_input.id, path=new_input.video_path, confidence=new_input.confidence, iou=new_input.iou)
+        return UserInput(
+          id=new_input.id, path=new_input.video_path, confidence=new_input.confidence, iou=new_input.iou
+        )
       except:
         db_connection.session.rollback()
         raise

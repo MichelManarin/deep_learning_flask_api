@@ -1,1 +1,2 @@
+from src.infra.repo.detection_results_repository import DetectionResultRepository
 from src.infra.repo.user_input_repository import UserInputRepository

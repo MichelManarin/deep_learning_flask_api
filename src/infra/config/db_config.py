@@ -6,7 +6,7 @@ class DBConnectionHandler:
   """ PostgreSQL database connection """
 
   def __init__(self):
-    self.__connection_string = "any_string"
+    self.__connection_string = "postgresql://postgres:dTfOaZxTrRfgjoyGxCuMmJLJtpDYyALa@monorail.proxy.rlwy.net:17406/railway"
     self.session = None
 
   def get_engine(self):
