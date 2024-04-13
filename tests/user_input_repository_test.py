@@ -48,8 +48,6 @@ def test_select_user_input():
 
    query_user_input = user_input_repository.select(user_input_id=user_input_id)
 
-   print(query_user_input)
-
    assert data in query_user_input
 
    engine.execute("DELETE FROM user_inputs WHERE id='{}';".format(user_input_id))
