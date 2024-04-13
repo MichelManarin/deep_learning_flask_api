@@ -48,7 +48,7 @@ def register_detection_result():
     if response.status_code < 300:
         message = {
             "type": "detection-result",
-            "id": response.body.id,
+            "data": response.body,
             "attributest": {},
         }
 

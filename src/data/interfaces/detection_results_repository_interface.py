@@ -6,7 +6,7 @@ class DetectionResultsRepositoryInterface(ABC):
   """ Interface to DetectionResults Repository """
 
   @abstractmethod
-  def insert(self, user_input_id: int, box: float, number_fps: int, class_name: str, confidence: float) -> DetectionResult:
+  def insert(self, user_input_id: int, number_fps: int, confidence: float, image_base64: str) -> DetectionResult:
     """ abstractmethod """
 
     raise Exception("Method not implemented")

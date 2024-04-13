@@ -17,7 +17,7 @@ class UserInput(Base):
     detection_results = relationship("DetectionResult", back_populates="user_input")
 
     def __repr__(self):
-        return f"UserInput [id={self.id}, video_path={self.video_path}]"
+        return f"UserInput [id={self.id}, video_path={self.video_path}, iou={self.iou}, confidence={self.confidence}]"
     
     def __eq__(self, other):
         if (self.id == other.id 

@@ -8,7 +8,7 @@ class RegisterDetectionResults(ABC):
     """ Interface to RegisterDetectionResults use case """
 
     @abstractclassmethod
-    def register(cls, user_input_id: int, box: JSONB, number_fps: int, class_name: str, confidence: float) -> Dict[bool, DetectionResult]:
+    def register(cls, user_input_id: int, number_fps: int, image_base64: str) -> Dict[bool, DetectionResult]:
         """ Case """
 
         raise Exception("Should implement method: register")
