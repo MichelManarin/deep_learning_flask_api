@@ -18,15 +18,34 @@ On the backend, each inference result should be saved to a postgres database. Fe
 
 ### API Endpoints
 
+- **Define process with parameters**
+   - Endpoint: `/api/user-input`
+  - Method: POST
+  - Description: Group of frames
+  - Example 1:
+ 
+  - request:
+  ```
+    {
+    "path": "123.mp4",
+    "iou": 0.5,
+    "confidence": 0.7
+    }
+    ```
+   - response:
+   id: 84
+
 - **Detect Objects:**
-  - Endpoint: `/detect`
+  - Endpoint: `/api/detection-result`
   - Method: POST
   - Description: Receives an image path, confidence threshold, and IoU threshold and returns the detection results.
   - Example 1:
     - request:
     ```
     {
-      "image_path": "/app/test/bus.jpg",
+      "number_fps": 1,             *identify the frame*
+      "user_input_id" : 84,        *user input *
+      "image_path": "base64image",
       "confidence": 0.7,
       "iou": 0.5
     }
@@ -82,12 +101,12 @@ On the backend, each inference result should be saved to a postgres database. Fe
     ```
     
 - **Health Check:**
-  - Endpoint: `/health_check`
+  - Endpoint: `/api/health_check`
   - Method: GET
   - Description: Checks if the model is loaded and returns the status.
 
 - **Load Model:**
-  - Endpoint: `/load_model`
+  - Endpoint: `/api/load_model`
   - Method: POST
   - Description: Loads a specified `model_name` for object detection. One of `yolov8n` (nano, faster, less accurate) or `yolov8s` (small, a bit slower and more accurate). 
 
