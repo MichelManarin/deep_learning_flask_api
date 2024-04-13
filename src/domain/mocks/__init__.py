@@ -1,1 +1,2 @@
 from .mock_user_input import mock_user_input
+from .mock_detection_result import mock_detection_result
