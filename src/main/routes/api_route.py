@@ -1,5 +1,4 @@
 from flask import Blueprint, jsonify, request
-from flask_cors import cross_origin
 from src.infra.neural_network import Model
 
 from src.main.composer import (
@@ -13,7 +12,6 @@ api_routes_bp = Blueprint("api_routes", __name__)
 model = Model("yolov8s")
 
 @api_routes_bp.route("/api/user-input", methods=["POST"])
-@cross_origin(origin='*')
 def register_user():
     """ register user input route """
 
@@ -38,7 +36,6 @@ def register_user():
     )
 
 @api_routes_bp.route("/api/detection-result", methods=["POST"])
-@cross_origin(origin='*')
 def register_detection_result():
     """ register detection result """
 
@@ -63,14 +60,12 @@ def register_detection_result():
 
 # TODO: refactor endpoints below in future
 @api_routes_bp.route('/api/health_check', methods=['GET'])
-@cross_origin(origin='*')
 def health_check():
     if model is None:
         return "Model is not loaded"
     return f"Model {model.model_name} is loaded"
 
 @api_routes_bp.route('/api/load_model', methods=['POST'])
-@cross_origin(origin='*')
 def load_model():
     model_name = request.json['model_name']
     global model
