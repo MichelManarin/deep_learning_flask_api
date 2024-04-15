@@ -12,3 +12,4 @@ psycopg2==2.9.9
 pre-commit==3.7.0
 pytest==8.1.1
 faker==24.9.0
+flask_cors==3.0.2

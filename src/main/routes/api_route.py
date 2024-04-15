@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from flask_cors import CORS
 from src.infra.neural_network import Model
 
 from src.main.composer import (
@@ -8,6 +9,8 @@ from src.main.composer import (
 from src.main.adapter import flask_adapter
 
 api_routes_bp = Blueprint("api_routes", __name__)
+CORS(api_routes_bp, resources={r"/api/*": {"origins": "https://deeplearningreact-production.up.railway.app"}})
+
 
 model = Model("yolov8s")
 
