@@ -22,7 +22,8 @@ class HistoricRepository(HistoricRepositoryInterface):
                 ORDER BY created_at DESC
                 LIMIT 10
             ) AS ui
-          JOIN detection_results AS dr ON ui.id = dr.user_input_id;
+          JOIN detection_results AS dr ON ui.id = dr.user_input_id
+          ORDER BY ui.id desc, number_fps;
         """
         results = db_connection.session.execute(sql_query)
 
