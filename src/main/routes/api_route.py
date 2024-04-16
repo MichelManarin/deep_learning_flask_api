@@ -1,17 +1,15 @@
 from flask import Blueprint, jsonify, request
 from flask_cors import CORS
 from src.infra.neural_network import Model
-
+from src.main.adapter import flask_adapter
 from src.main.composer import (
     register_user_input_composer,
     register_detection_results_composer,
     list_historic_composer
 )
-from src.main.adapter import flask_adapter
 
 api_routes_bp = Blueprint("api_routes", __name__)
 CORS(api_routes_bp, resources={r"/api/*": {"origins": "https://deeplearningreact-production.up.railway.app"}})
-
 
 model = Model("yolov8s")
 
@@ -31,7 +29,6 @@ def register_user():
 
         return jsonify(message), response.status_code
 
-    # Handling Errors
     return (
         jsonify(
             {"error": {"status": response.status_code, "title": response.body["error"]}}
@@ -68,7 +65,6 @@ def list_historic_result():
     message = {}
     response = flask_adapter(request=request, api_route=list_historic_composer())
 
-    print(response.body)
     if response.status_code < 300:
         historics_dicts = [historic._asdict() for historic in response.body]
         message = {
