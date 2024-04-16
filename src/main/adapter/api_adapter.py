@@ -18,10 +18,16 @@ def flask_adapter(request: any, api_route: Type[Route]) -> any:
         return HttpResponse(
             status_code=http_error["status_code"], body=http_error["body"]
         )
-
-    http_request = HttpRequest(
-        header=request.headers, body=request.json, query=query_string_params
-    )
+    
+    if request.method == 'GET':
+        http_request = HttpRequest(
+            header=request.headers, body={}, query=query_string_params
+        )
+    else:
+        body = request.json if request.json else {}
+        http_request = HttpRequest(
+            header=request.headers, body=body, query=query_string_params
+        )
 
     try:
         response = api_route.route(http_request)

@@ -1,2 +1,3 @@
 from .register_user_input_composite import register_user_input_composer
 from .register_detection_results_composite import register_detection_results_composer
+from .list_historic_composite import list_historic_composer

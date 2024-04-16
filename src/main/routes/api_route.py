@@ -4,7 +4,8 @@ from src.infra.neural_network import Model
 
 from src.main.composer import (
     register_user_input_composer,
-    register_detection_results_composer
+    register_detection_results_composer,
+    list_historic_composer
 )
 from src.main.adapter import flask_adapter
 
@@ -53,13 +54,37 @@ def register_detection_result():
 
         return jsonify(message), response.status_code
 
-    # Handling Errors
     return (
         jsonify(
             {"error": {"status": response.status_code, "title": response.body["error"]}}
         ),
         response.status_code,
     )
+
+@api_routes_bp.route("/api/historic", methods=["GET"])
+def list_historic_result():
+    """ list historic result """
+
+    message = {}
+    response = flask_adapter(request=request, api_route=list_historic_composer())
+
+    print(response.body)
+    if response.status_code < 300:
+        historics_dicts = [historic._asdict() for historic in response.body]
+        message = {
+            "type": "list-historic",
+            "data": historics_dicts,
+        }
+
+        return jsonify(message), response.status_code
+
+    return (
+        jsonify(
+            {"error": {"status": response.status_code, "title": response.body["error"]}}
+        ),
+        response.status_code,
+    )
+
 
 # TODO: refactor endpoints below in future
 @api_routes_bp.route('/api/health_check', methods=['GET'])

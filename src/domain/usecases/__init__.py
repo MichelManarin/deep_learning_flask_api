@@ -1,2 +1,3 @@
 from .register_input_user import RegisterUserInput
 from .register_detection_results import RegisterDetectionResults
+from .list_historic import ListHistoric
