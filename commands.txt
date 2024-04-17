@@ -1,8 +1,10 @@
+Run:
+  flask run
 Test:
   python -m pytest tests/
 Test verbose:
   python -m pytest tests/ -v -s
-Create Entities into database:
+Create Entities into database (I left the connection string in db_config, I will adjust as soon as possible):
   python or python3
   from src.infra.config import *
   from src.infra.entities import *
