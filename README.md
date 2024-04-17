@@ -13,4 +13,4 @@ My deadline is today, but if I can continue improving the project just let me kn
 
 I welcome any feedback or suggestions for improvement
 
-
+commands.txt explaning how run (I left the connection string in db_config, I will adjust as soon as possible): 
